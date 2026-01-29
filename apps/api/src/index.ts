@@ -10,7 +10,7 @@ app.use(express.json());
 app.get("/api/health", (req, res) => {
   res.json({
     status: "healthy",
-    message: "Simple MERN monorepo backend is alive! 🚀",
+    message: "Hello",
     time: new Date().toISOString(),
   });
 });
@@ -21,17 +21,6 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/jobs", async (req, res) => {
-  try {
-    const response = await fetch(
-      "https://jobdataapi.com/api/jobs/?title=Full%20Stack%20Developer&max_age=90"
-    );
-    const data = await response.json();
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch jobs" });
-  }
-});
 
 app.listen(PORT, () => {
   console.log(`API → http://localhost:${PORT}`);
