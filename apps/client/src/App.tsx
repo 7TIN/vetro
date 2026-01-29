@@ -1,28 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; // Import the new component
 import Card from './components/Card';
+import ChatContent from './components/ChatContent';
 
 const App = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const toggleCard = () => {
-    setIsOpen((prev) => !prev);
-  };
-
   return (
-    <div className="font-mono flex flex-col items-end justify-end h-screen w-full p-6 gap-4">      
+    <div className="font-mono flex flex-col items-end justify-end h-screen w-full p-6 gap-4 bg-gray-100">
+      
+      {/* The Card Container */}
       {isOpen && (
-        <Card className="h-96 w-80 animate-fade-in bg-amber-300">
-           <div className="p-4">
-             Hello
-             {/* <iframe title="chatbot" src="http://localhost:5173" className="w-full h-full"></iframe> */}
-           </div>
+        <Card className="h-[500px] w-96 shadow-2xl animate-fade-in mb-2 mr-2">
+           {/* We inject the ChatContent here */}
+           <ChatContent />
         </Card>
       )}
 
+      {/* The Toggle Button */}
       <button 
-        onClick={toggleCard}
-        className="h-16 w-16 bg-neutral-900 hover:bg-neutral-800 rounded-full text-white shadow-lg flex items-center justify-center transition-all duration-200"
-        aria-label="Toggle Chat"
+        onClick={() => setIsOpen(!isOpen)}
+        className="h-16 w-16 bg-neutral-900 hover:bg-neutral-800 rounded-full text-white shadow-lg flex items-center justify-center transition-all duration-200 z-50"
       >
         {isOpen ? (
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
