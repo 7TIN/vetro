@@ -14,10 +14,10 @@ const App = () => {
   }, [isOpen]);
 
   return (
-    <div className="h-full w-full flex flex-col items-end justify-end p-4 gap-4 pointer-events-none">
+    <div className="h-full w-full flex flex-col items-end justify-end gap-4 pointer-events-none">
       
       {isOpen && (
-        <Card className="flex-1 w-full shadow-2xl animate-fade-in pointer-events-auto">
+        <Card className="flex-1 w-full pointer-events-auto">
            <ChatContent />
         </Card>
       )}
