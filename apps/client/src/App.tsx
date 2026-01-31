@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Import the new component
+import { useState } from 'react'; // Import the new component
 import Card from './components/Card';
 import ChatContent from './components/ChatContent';
 
@@ -10,7 +10,7 @@ const App = () => {
       
       {/* The Card Container */}
       {isOpen && (
-        <Card className="h-[500px] w-96 shadow-2xl animate-fade-in mb-2 mr-2">
+        <Card className="h-125 w-96 shadow-2xl animate-fade-in mb-2 mr-2">
            {/* We inject the ChatContent here */}
            <ChatContent />
         </Card>

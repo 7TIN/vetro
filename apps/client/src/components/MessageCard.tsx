@@ -1,5 +1,3 @@
-import React from 'react';
-
 type MessageCardProps = {
   type: "incoming" | "outgoing";
   message: string;
