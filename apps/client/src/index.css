@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+
+/* Make the entire foundation transparent */
+html, body, #root {
+  background-color: transparent !important;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevents scrollbars on the iframe itself */
+}

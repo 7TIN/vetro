@@ -1,33 +1,40 @@
-import { useState } from 'react'; // Import the new component
-import Card from './components/Card';
+import React, { useState, useEffect } from 'react';
+import Card from './components/Card'; 
 import ChatContent from './components/ChatContent';
 
 const App = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      window.parent.postMessage({ type: 'CHAT_RESIZE', width: '400px', height: '600px' }, '*');
+    } else {
+      window.parent.postMessage({ type: 'CHAT_RESIZE', width: '80px', height: '80px' }, '*');
+    }
+  }, [isOpen]);
 
   return (
-    <div className="font-mono flex flex-col items-end justify-end h-screen w-full p-6 gap-4 bg-gray-100">
+    <div className="h-full w-full flex flex-col items-end justify-end p-4 gap-4 pointer-events-none">
       
-      {/* The Card Container */}
       {isOpen && (
-        <Card className="h-125 w-96 shadow-2xl animate-fade-in mb-2 mr-2">
-           {/* We inject the ChatContent here */}
+        <Card className="flex-1 w-full shadow-2xl animate-fade-in pointer-events-auto">
            <ChatContent />
         </Card>
       )}
 
-      {/* The Toggle Button */}
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="h-16 w-16 bg-neutral-900 hover:bg-neutral-800 rounded-full text-white shadow-lg flex items-center justify-center transition-all duration-200 z-50"
+        className="pointer-events-auto h-14 w-14 bg-neutral-900 hover:bg-neutral-800 rounded-full text-white shadow-lg flex items-center justify-center transition-all duration-200"
       >
         {isOpen ? (
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
+          // Close Icon
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+          // Chat Icon
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
           </svg>
         )}
       </button>
